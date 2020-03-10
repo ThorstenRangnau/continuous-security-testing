@@ -1,0 +1,11 @@
+version: 3
+
+services:
+  vulnerable-api:
+    build: vapi
+    ports:
+      - 8080:8080
+  bdd-security:
+    build: bdd-security
+    depends_on:
+      - vulnerable-api
