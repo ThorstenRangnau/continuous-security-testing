@@ -10,4 +10,4 @@ services:
     depends_on:
       - vulnerable-api
     volumes:
-      - bdd-security/results:/home/bdd-security/build/reports/cucumber/pretty/feature-overview.html
+      - ./bdd-security/results/:/home/bdd-security/build/reports/cucumber/pretty/
