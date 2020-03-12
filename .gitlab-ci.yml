@@ -26,3 +26,4 @@ test:
     - sed -i "s/build.*$/image:$($CI_REGISTRY/zap:$CI_COMMIT_SHA)/"
   script:
     - docker-compose up
+
