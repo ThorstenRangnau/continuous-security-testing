@@ -1,0 +1,28 @@
+# load docker image & start docker engine
+image: docker:19.03.1
+services:
+  - docker:19.03.1-dind
+
+stages:
+  - build
+  - test
+
+build_zap:
+  stage: build
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build api-scanning/zap -t $CI_REGISTRY/zap:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/zap:$CI_COMMIT_SHA
+test:
+  stage: test
+  image:
+    name: docker/compose
+  before_script:
+    - cd api-scanning
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - sed -i "s/dockerfile.*$//"
+    - sed -i "s/context.*$//"
+    - sed -i "s/build.*$/image:$($CI_REGISTRY/zap:$CI_COMMIT_SHA)/"
+  script:
+    - docker-compose up
