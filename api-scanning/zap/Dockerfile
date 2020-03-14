@@ -80,9 +80,10 @@ RUN chown zap:zap /zap/* && \
 	chmod a+x /home/zap/.xinitrc
 
 #Change back to zap at the end
-USER zap
-
-HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
 
 RUN apt-get install nginx
 COPY nginx.conf /etc/nginx/
+
+USER zap
+
+HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
