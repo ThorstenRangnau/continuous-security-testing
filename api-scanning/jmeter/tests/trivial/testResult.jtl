@@ -1,0 +1,6 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1584182426009,1093,HTTP Request,200,OK,Thread Group 1-1,text,true,,9727,571,1,1,https://demo.testfire.net/login.jsp,73,0,46
+1584182426009,76,HTTP Request-0,302,OK,Thread Group 1-1,text,true,,651,309,1,1,http://demo.testfire.net/bank/login.aspx,73,0,46
+1584182426088,863,HTTP Request-1,302,Found,Thread Group 1-1,,true,,202,134,1,1,https://demo.testfire.net/bank/login.aspx,863,0,1
+1584182426951,151,HTTP Request-2,200,OK,Thread Group 1-1,text,true,,8874,128,1,1,https://demo.testfire.net/login.jsp,151,0,0
+1584186467670,50,HTTP Request,Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused,Thread Group 1-1,text,false,,2545,0,1,1,http://demo.testfire.net/bank/login.aspx,0,0,50
