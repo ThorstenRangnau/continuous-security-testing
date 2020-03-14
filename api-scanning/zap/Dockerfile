@@ -84,3 +84,5 @@ USER zap
 
 HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
 
+RUN apt-get install nginx
+COPY nginx.conf /etc/nginx/
