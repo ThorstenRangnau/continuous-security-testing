@@ -83,3 +83,4 @@ RUN chown zap:zap /zap/* && \
 USER zap
 
 HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
+
