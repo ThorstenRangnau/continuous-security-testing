@@ -81,7 +81,7 @@ RUN chown zap:zap /zap/* && \
 
 #Change back to zap at the end
 
-RUN apt-get install nginx
+RUN apt-get update && apt-get install -y nginx && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY nginx.conf /etc/nginx/
 
 USER zap
