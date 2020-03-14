@@ -23,3 +23,4 @@ WARN-NEW: Web Browser XSS Protection Not Enabled [10016] x 4
  - Changed zap-full-scan.py to include the active scan alpha rules when the -a switch is used
  - Fixed ownership of all files in the /zap directory
  - Added this changelog
+
