@@ -63,7 +63,7 @@
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.proxyHost">192.168.178.10</stringProp>
+          <stringProp name="HTTPSampler.proxyHost">zap</stringProp>
           <stringProp name="HTTPSampler.proxyPort">8090</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -73,3 +73,6 @@
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
+<!--
+          <stringProp name="HTTPSampler.proxyHost">127.0.0.1</stringProp>
+-->
