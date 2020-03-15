@@ -63,11 +63,12 @@ ENV ZAP_PATH /zap/zap.sh
 ENV ZAP_PORT 8080
 ENV HOME /home/zap/
 
-COPY ./zap/webswing.config /zap/webswing/
-COPY ./zap/policies /home/zap/.ZAP/policies/
+COPY . /zap/
+COPY ./webswing.config /zap/webswing/
+COPY ./policies /home/zap/.ZAP/policies/
 # The scan script loads the scripts from dev home dir.
-COPY ./zap/scripts /home/zap/.ZAP_D/scripts/
-COPY ./zap/.xinitrc /home/zap/
+COPY ./scripts /home/zap/.ZAP_D/scripts/
+COPY ./.xinitrc /home/zap/
 
 #Copy doesn't respect USER directives so we need to chown and to do that we need to be root
 USER root
