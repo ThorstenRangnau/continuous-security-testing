@@ -14,5 +14,6 @@ services:
     build:
       context: .
       dockerfile: ./jmeter/Dockerfile
+    command: -Dlog_level.jmeter=DEBUG -JTARGET_HOST=demo.testfire.net -JTARGET_PORT=80 -JTARGET_PATH=/bank/login.aspx -H zap -P 8090 -N localhost -n -t /jmeter/tests/security/HTTP_Request.jmx -l /jmeter/tests/security/HTTP_Request.jtl -j /jmeter/tests/security/jmeter.log -e -o /jmeter/tests/security/securityreport
     volumes:
-      - .:/opt/apache-jmeter-5.1.1
+      - ./jmeter:/jmeter
