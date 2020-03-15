@@ -12,16 +12,19 @@ x=$(($freeMem/10*8))
 n=$(($freeMem/10*2))
 export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
-rm -rf /jmeter/results/security > /dev/null 2>&1
+rm -rf /jmeter/results/jmeter/security > /dev/null 2>&1
 
 
 echo "START Running Jmeter on `date`"
 echo "JVM_ARGS=${JVM_ARGS}"
 echo "jmeter args=$@"
 
+./wait-for-it.sh zap:8090 -t 60
 # Keep entrypoint simple: we must pass the standard JMeter arguments
 jmeter $@
 echo "END Running Jmeter on `date`"
+
+curl -X GET http://zap:8090/JS
 
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
 
