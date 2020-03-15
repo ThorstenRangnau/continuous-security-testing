@@ -1,0 +1,2 @@
+export ZAP_URL="image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:zap-${CI_COMMIT_SHA}"
+export JMETER_URL="image: ${CI_REGISTRY}/${CI_PROJECT_PATH}:jmeter-${CI_COMMIT_SHA}"

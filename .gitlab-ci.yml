@@ -30,9 +30,10 @@ test:
   image:
     name: docker/compose
   before_script:
+    - ./imageurls.sh
     - cd api-scanning
-    - "sed -i 's|build.*$|image: $(${CI_REGISTRY}/${CI_PROJECT_PATH}:zap-${CI_COMMIT_SHA})|' docker-compose.yml"
-    - "sed -i 's|build.*$|image: $(${CI_REGISTRY}/${CI_PROJECT_PATH}:jmeter-${CI_COMMIT_SHA})|' docker-compose.yml"
+    - sed -i 's|build.*$|${ZAP_URL}|' docker-compose.yml
+    - sed -i 's|build.*$|${JMETER_URL}|' docker-compose.yml
   script:
     - cat docker-compose.yml
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
