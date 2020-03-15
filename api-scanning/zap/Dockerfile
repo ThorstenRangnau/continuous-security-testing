@@ -63,7 +63,6 @@ ENV ZAP_PATH /zap/zap.sh
 ENV ZAP_PORT 8080
 ENV HOME /home/zap/
 
-COPY zap* ./zap/CHANGELOG.md /zap/
 COPY ./zap/webswing.config /zap/webswing/
 COPY ./zap/policies /home/zap/.ZAP/policies/
 # The scan script loads the scripts from dev home dir.
