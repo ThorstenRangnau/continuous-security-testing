@@ -13,7 +13,7 @@ build_zap:
     - cd api-scanning
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build ap -t $CI_REGISTRY/zap:$CI_COMMIT_SHA
+    - docker build zap -t $CI_REGISTRY/zap:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY/zap:$CI_COMMIT_SHA
 
 test:
