@@ -24,8 +24,8 @@ echo "jmeter args=$@"
 jmeter $@
 echo "END Running Jmeter on `date`"
 
-curl -X GET http://zap:8090/JS
-
+curl -X GET "http://localhost:8090/HTML/core/view/alerts" install -D /jmeter/results/zap/html/LoginTesting.HTML
+curl -X GET "http://localhost:8090/HTML/core/view/alerts" install -D /jmeter/results/zap/json/LoginTesting.JSON
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
 
 #     -n \
