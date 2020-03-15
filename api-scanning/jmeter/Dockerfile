@@ -40,6 +40,7 @@ COPY wait-for-it.sh /opt/apache-jmeter-5.1.1
 RUN chmod +x /opt/apache-jmeter-5.1.1/wait-for-it.sh
 RUN mkdir /jmeter
 
+
 COPY tests /jmeter/tests
 
 WORKDIR	${JMETER_HOME}
