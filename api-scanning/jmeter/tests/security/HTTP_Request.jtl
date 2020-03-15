@@ -1,2 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
-1584277124036,143,HTTP Request,Non HTTP response code: org.apache.http.conn.HttpHostConnectException,Non HTTP response message: Connect to zap:8090 [zap/172.19.0.2] failed: Connection refused (Connection refused),Thread Group 1-1,text,false,,2635,0,1,1,http://demo.testfire.net/bank/login.aspx,0,0,142

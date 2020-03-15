@@ -37,6 +37,8 @@ ENV PATH $PATH:$JMETER_BIN
 COPY ./jmeter/entrypoint.sh /
 RUN mkdir /jmeter
 
+COPY jmeter/tests /jmeter/tests
+
 WORKDIR	${JMETER_HOME}
 
 ENTRYPOINT ["/entrypoint.sh"]
