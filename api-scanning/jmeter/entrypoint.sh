@@ -27,14 +27,10 @@ echo "END Running Jmeter on `date`"
 mkdir -p /jmeter/results/zap/html
 mkdir -p /jmeter/results/zap/json
 
+sleep 10
+
 curl -X GET http://zap:8090/HTML/core/view/alerts > /jmeter/results/zap/html/LoginTesting.HTML
 curl -X GET http://zap:8090/JSON/core/view/alerts > /jmeter/results/zap/json/LoginTesting.JSON
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
 
-#     -n \
-#    -t "/tests/${TEST_DIR}/${TEST_PLAN}.jmx" \
-#    -l "/tests/${TEST_DIR}/${TEST_PLAN}.jtl"
-# exec tail -f jmeter.log
-#    -D "java.rmi.server.hostname=${IP}" \
-#    -D "client.rmi.localport=${RMI_PORT}" \
-#  -R $REMOTE_HOSTS
+python3 should_it_fail.py
