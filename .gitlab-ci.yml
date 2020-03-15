@@ -11,19 +11,17 @@ build_zap:
   stage: build
   before_script:
     - cd api-scanning
-  script:
-    - echo $CI_JOB_TOKEN
-    - echo $CI_REGISTRY
-    - echo $CI_COMMIT_SHA
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
     - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
 
 build_jmeter:
+  stage: build
   before_script:
     - cd api-scanning
-  script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
     - docker build jmeter -t $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
 
