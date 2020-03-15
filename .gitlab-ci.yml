@@ -30,10 +30,11 @@ test:
   image:
     name: docker/compose
   before_script:
-    - ./imageurls.sh
     - cd api-scanning
-    - echo $ZAP_URL
+    - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
+    - export JMETER url=$CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
     - echo $JMETER_URL
+    - echo $ZAP_URL
     - sed -i "s|build.*$|$ZAP_URL|" docker-compose.yml
     - sed -i "s|build.*$|$JMETER_URL|" docker-compose.yml
   script:
