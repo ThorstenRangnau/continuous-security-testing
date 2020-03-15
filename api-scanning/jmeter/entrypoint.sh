@@ -12,8 +12,8 @@ x=$(($freeMem/10*8))
 n=$(($freeMem/10*2))
 export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
-rm -rf /jmeter/results/security/securityreport > /dev/null 2>&1
-rm /jmeter/results/security/jmeter.log
+rm -rf /jmeter/results/security > /dev/null 2>&1
+
 
 echo "START Running Jmeter on `date`"
 echo "JVM_ARGS=${JVM_ARGS}"
@@ -23,7 +23,8 @@ echo "jmeter args=$@"
 jmeter $@
 echo "END Running Jmeter on `date`"
 
-tail -f /dev/null
+curl -X GET http://zap:8090/JSON/core/action/shutdown/
+
 #     -n \
 #    -t "/tests/${TEST_DIR}/${TEST_PLAN}.jmx" \
 #    -l "/tests/${TEST_DIR}/${TEST_PLAN}.jtl"
