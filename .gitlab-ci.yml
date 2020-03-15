@@ -16,16 +16,16 @@ build_zap:
     - echo $CI_REGISTRY
     - echo $CI_COMMIT_SHA
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build zap -t $CI_REGISTRY/zap:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/zap:$CI_COMMIT_SHA
+    - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
 
 build_jmeter:
   before_script:
     - cd api-scanning
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build jmeter -t $CI_REGISTRY/jmeter:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/jmeter:$CI_COMMIT_SHA
+    - docker build jmeter -t $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
 
 test:
   stage: test
@@ -33,9 +33,9 @@ test:
     name: docker/compose
   before_script:
     - cd api-scanning
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - sed -i "s/build.*$/image:$($CI_REGISTRY/zap:$CI_COMMIT_SHA)/"
-    - sed -i "s/build.*$/image:$($CI_REGISTRY/jmeter:$CI_COMMIT_SHA)/"
+    - sed -i "s/build.*$/image:$($CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA)/"
+    - sed -i "s/build.*$/image:$($CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA)/"
   script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
 
