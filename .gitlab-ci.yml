@@ -36,8 +36,8 @@ test:
     - "export PREFIX='image: '"
     - echo $JMETER_URL
     - echo $ZAP_URL
-    - sed -i "s|build.*$|$PREFIX$ZAP_URL| docker-compose.yml'
-    - sed -i "s|build.*$|$PREFIX$JMETER_URL| docker-compose.yml'
+    - sed -i "s|build.*$|$PREFIX$ZAP_URL| docker-compose.yml
+    - sed -i "s|build.*$|$PREFIX$JMETER_URL| docker-compose.yml
   script:
     - cat docker-compose.yml
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
