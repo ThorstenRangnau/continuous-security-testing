@@ -7,37 +7,55 @@ stages:
   - build
   - test
 
-build_zap:
+# BUILD API SCANNING
+build_api_scan_zap:
   stage: build
   before_script:
     - cd api-scanning
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
+    - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
 
-build_jmeter:
+build_api_scan_jmeter:
   stage: build
   before_script:
     - cd api-scanning
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build jmeter -t $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
+    - docker build jmeter -t $CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
 
-test:
+# BUILD WAST
+build_wast_zap_script:
+  stage: build
+  before_script:
+    - cd wast-testing
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build pentest -t $CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-script-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-script-$CI_COMMIT_SHA
+
+build_wast_zap:
+  stage: build
+  before_script:
+    - cd wast-testing
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-$CI_COMMIT_SHA
+
+# TEST API SCAN
+test_api_scan:
   stage: test
   image:
     name: docker/compose
   before_script:
+    - apk add python3
+    - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
+    - export JMETER_URL=$CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
+    - python3 update-compose.py --file='api-scanning/docker-compose.yml' --variables 'zap_url' 'jmeter_url'
     - cd api-scanning
-    - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
-    - export JMETER_URL=$CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
-    - "export PREFIX='image: '"
-    - echo $JMETER_URL
-    - echo $ZAP_URL
-    - sed -i "0 s|build.*$|$PREFIX$ZAP_URL|" docker-compose.yml
-    - sed -i "0 s|build.*$|$PREFIX$JMETER_URL|" docker-compose.yml
   script:
     - cat docker-compose.yml
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -47,3 +65,24 @@ test:
     paths:
       - jmeter/results/jmeter
       - jmeter/results/zap
+
+# TEST WAST
+test_wast:
+  stage: test
+  image:
+    name: docker/compose
+  before_script:
+    - apk add python3
+    - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-$CI_COMMIT_SHA
+    - export ZAP_SCRIPT_URL=$CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-script-$CI_COMMIT_SHA
+    - python3 update-compose.py --file='wast-testing/docker-compose.yml' --variables 'zap_script_url' 'zap_url'
+    - cd wast-testing
+  script:
+    - cat docker-compose.yml
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker-compose up
+  # - python3 parse_results.py 
+  # artifacts:
+  #   paths:
+  #     - jmeter/results/jmeter
+  #     - jmeter/results/zap
