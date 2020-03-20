@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+echo "***** SeleniumBase Docker Machine *****"
+echo "Checking for ZAP"
+./wait-for-it.sh zap:8090 -t 30
+echo "Checking for WebGoat"
+./wait-for-it.sh webgoat:8080 -t 60
+
+# we actually have to run two selenium tests first one to register a user
+
+exec "$@"

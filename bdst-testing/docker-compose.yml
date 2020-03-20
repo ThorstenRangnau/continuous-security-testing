@@ -17,3 +17,6 @@ services:
         depends_on:
             - zap
             - webgoat
+        command: pytest -s test_register_web_goat_SB.py --browser=chrome --headless
+
+#        --proxy=zap:8090  seleniumbase.config.proxy_list.PROXY_LIST

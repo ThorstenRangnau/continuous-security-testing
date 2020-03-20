@@ -3,12 +3,15 @@
 from seleniumbase import BaseCase
 class UserRegistration(BaseCase):
 
-	def test_user_registration(self): 
-		self.open('http://hackazon.webscantest.com/') 
-		self.click("link=Sign In / Sign Up") 
+	def test_user_registration(self):
+		print("OPEN HACKAZON")
+		self.open('http://hackazon.webscantest.com/')
+		print("DOSOMETHING1")
+		self.click("link=Sign In / Sign Up")
 		self.click('#username')
-		self.click("link=New user?") 
-		self.click('#first_name') 
+		self.click("link=New user?")
+		print("DOSOMETHING2")
+		self.click('#first_name')
 		self.update_text('#first_name', 'FirstName') 
 		self.update_text('#last_name', 'LastName') 
 		self.update_text('#username', 'UserName1') 
