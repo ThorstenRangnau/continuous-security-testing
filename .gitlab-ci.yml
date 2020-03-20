@@ -30,14 +30,10 @@ test:
   image:
     name: docker/compose
   before_script:
-    - cd api-scanning
     - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
     - export JMETER_URL=$CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
-    - "export PREFIX='image: '"
-    - echo $JMETER_URL
-    - echo $ZAP_URL
-    - sed -i "0 s|build.*$|$PREFIX$ZAP_URL|" docker-compose.yml
-    - sed -i "0 s|build.*$|$PREFIX$JMETER_URL|" docker-compose.yml
+    - python3 update-compose.py --file='api-scanning/docker-compose.yml' --variables 'zap_url' 'jmeter_url'
+    - cd api-scanning
   script:
     - cat docker-compose.yml
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
