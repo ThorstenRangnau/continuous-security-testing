@@ -37,7 +37,7 @@ def replace_first_occurrence(file, pattern, subst):
 
 
 for value in values:
-    replace_first_occurrence(args.file, 'build(.*)$', 'image: ', value)
+    replace_first_occurrence(args.file, 'build(.*)$', 'image: %s' % value)
 
 
 
