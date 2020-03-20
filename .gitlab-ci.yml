@@ -51,6 +51,7 @@ test_api_scan:
   image:
     name: docker/compose
   before_script:
+    - apk add python3
     - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
     - export JMETER_URL=$CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
     - python3 update-compose.py --file='api-scanning/docker-compose.yml' --variables 'zap_url' 'jmeter_url'
@@ -71,6 +72,7 @@ test_wast:
   image:
     name: docker/compose
   before_script:
+    - apk add python3
     - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-$CI_COMMIT_SHA
     - export ZAP_SCRIPT_URL=$CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-script-$CI_COMMIT_SHA
     - python3 update-compose.py --file='wast-testing/docker-compose.yml' --variables 'zap_script_url' 'zap_url'
