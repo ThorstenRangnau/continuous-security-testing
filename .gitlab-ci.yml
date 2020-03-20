@@ -15,7 +15,7 @@ build_api_scan_zap:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build zap -t $CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:zap-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:api-zap-$CI_COMMIT_SHA
 
 build_api_scan_jmeter:
   stage: build
@@ -24,7 +24,7 @@ build_api_scan_jmeter:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build jmeter -t $CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:jmeter-$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:api-jmeter-$CI_COMMIT_SHA
 
 # BUILD WAST
 build_wast_zap_script:
