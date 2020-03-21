@@ -5,6 +5,8 @@ services:
             - zap
             - webgoat
         build: pentest
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
     zap:
         build: zap
         ports:
