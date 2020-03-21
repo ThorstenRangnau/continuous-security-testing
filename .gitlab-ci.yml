@@ -46,7 +46,7 @@ build_wast_zap:
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:wast-zap-$CI_COMMIT_SHA
 
 # BUILD BDST
-build_wast_zap_script:
+build_bdst_selenium:
   stage: build
   before_script:
     - cd bdsttesting
