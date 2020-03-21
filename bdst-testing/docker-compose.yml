@@ -5,6 +5,10 @@ services:
         ports:
             - 8090:8090
         command: zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.disablekey=true -config database.recoverylog=false -config connection.timeoutInSecs=120 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
+        networks:
+            testing_net:
+                ipv4_address: 172.28.1.1
+
     webgoat:
         image: webgoat/webgoat-8.0
         ports:
@@ -12,11 +16,26 @@ services:
         volumes:
             - .:/home/webgoat/.webgoat
         working_dir: /home/webgoat
+        networks:
+            testing_net:
+                ipv4_address: 172.28.1.2
+
     seleniumbase:
         build: selenium_base_tests
         depends_on:
             - zap
             - webgoat
-        command: pytest -s test_register_web_goat_SB.py --browser=chrome --headless
+        command: pytest -s test_register_web_goat_SB.py --browser=chrome --headless --proxy=172.28.1.1:8090
+#      && pytest -s test_sql_injection_with_login_SB.py --browser=chrome --headless --proxy=172.28.1.1:8090
+        networks:
+            testing_net:
+                ipv4_address: 172.28.1.3
+
+networks:
+    testing_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.0.0/16
 
 #        --proxy=zap:8090  seleniumbase.config.proxy_list.PROXY_LIST
