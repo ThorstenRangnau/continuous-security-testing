@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io/api/java,macos,gradle,python,pycharm,windows
 # Edit at https://www.gitignore.io/?templates=java,macos,gradle,python,pycharm,windows
 
-api-scanning/jmeter/results
+apiscanning/jmeter/results
 
 ### Java ###
 # Compiled class file
