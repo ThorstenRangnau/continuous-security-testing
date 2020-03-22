@@ -108,7 +108,7 @@ test_wast:
 
 
 # TEST BDST
-test_wast:
+test_bdst:
   stage: test
   image:
     name: docker/compose
