@@ -25,7 +25,7 @@ services:
         depends_on:
             - zap
             - webgoat
-        command: pytest -s test_register_web_goat_SB.py --browser=chrome --headless --proxy=172.28.1.1:8090
+        command: py.test -s --browser=chrome --headless --proxy=172.28.1.1:8090
 #      && pytest -s test_sql_injection_with_login_SB.py --browser=chrome --headless --proxy=172.28.1.1:8090
         networks:
             testing_net:

@@ -11,6 +11,7 @@ RUN pip install seleniumbase
 RUN seleniumbase install chromedriver
 
 COPY test_register_web_goat_SB.py /usr/src/app
+COPY test_sql_injection_with_login_SB.py /usr/src/app
 COPY entrypoints.sh /
 COPY wait-for-it.sh /usr/src/app
 
