@@ -1,4 +1,4 @@
 timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
-1584881086001,679,HTTP Request,200,OK,Thread Group 1-1,text,true,,8923,495,1,1,http://demo.testfire.net/login.jsp,510,0,104
-1584881086001,510,HTTP Request-0,302,Found,Thread Group 1-1,,true,,202,311,1,1,http://demo.testfire.net/bank/login.aspx,510,0,104
-1584881086515,165,HTTP Request-1,200,OK,Thread Group 1-1,text,true,,8721,184,1,1,http://demo.testfire.net/login.jsp,160,0,0
+1584882971004,667,HTTP Request,200,OK,Thread Group 1-1,text,true,,8923,495,1,1,http://demo.testfire.net/login.jsp,490,0,52
+1584882971004,490,HTTP Request-0,302,Found,Thread Group 1-1,,true,,202,311,1,1,http://demo.testfire.net/bank/login.aspx,490,0,52
+1584882971496,175,HTTP Request-1,200,OK,Thread Group 1-1,text,true,,8721,184,1,1,http://demo.testfire.net/login.jsp,173,0,0
