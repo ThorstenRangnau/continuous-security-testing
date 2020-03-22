@@ -37,7 +37,6 @@ ENV PATH $PATH:$JMETER_BIN
 
 # Entrypoint has same signature as "jmeter" command
 COPY wait-for-it.sh /opt/apache-jmeter-5.1.1
-COPY should_it_fail.py /opt/apache-jmeter-5.1.1
 
 RUN chmod +x /opt/apache-jmeter-5.1.1/wait-for-it.sh
 RUN mkdir /jmeter

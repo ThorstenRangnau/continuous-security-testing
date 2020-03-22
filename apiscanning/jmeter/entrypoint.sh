@@ -24,6 +24,7 @@ echo "jmeter args=$@"
 jmeter $@
 echo "END Running Jmeter on `date`"
 
+# create directories for results
 mkdir -p /results/zap/html
 mkdir -p /results/zap/json
 
@@ -32,4 +33,5 @@ sleep 10
 curl -X GET http://zap:8090/HTML/core/view/alerts > /results/zap/html/results.HTML
 curl -X GET http://zap:8090/JSON/core/view/alerts > /results/zap/json/results.JSON
 
+# test complete: shutdown zap
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
