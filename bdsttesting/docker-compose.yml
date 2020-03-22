@@ -2,8 +2,6 @@ version: '3'
 services:
     zap:
         build: zap
-        ports:
-            - 8090:8090
         command: zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.disablekey=true -config database.recoverylog=false -config connection.timeoutInSecs=120 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
         networks:
             testing_net:
@@ -11,8 +9,6 @@ services:
 
     webgoat:
         image: webgoat/webgoat-8.0
-        ports:
-            - "8080:8080"
         volumes:
             - .:/home/webgoat/.webgoat
         working_dir: /home/webgoat
@@ -28,6 +24,7 @@ services:
         command: py.test -s --browser=chrome --headless --proxy=172.28.1.1:8090
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
+            - ./results:/results
         networks:
             testing_net:
                 ipv4_address: 172.28.1.3

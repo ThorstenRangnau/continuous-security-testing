@@ -11,6 +11,15 @@ echo "$@"
 echo "running tests"
 $@
 
+# create directories to store results in
+mkdir -p /results/zap/html
+mkdir -p /results/zap/json
+
+# sleep for 10 seconds & then get results form ZAP
+sleep 10
+curl -X GET http://zap:8090/HTML/core/view/alerts > /results/zap/html/results.HTML
+curl -X GET http://zap:8090/JSON/core/view/alerts > /results/zap/json/results.JSON
+
 echo "terminating ZAP"
 # tests are done, so terminate ZAP & webgoat
 curl -X GET http://zap:8090/JSON/core/action/shutdown/

@@ -8,12 +8,10 @@ services:
   zap:
     build: zap
     command: zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.disablekey=true -config database.recoverylog=false -config connection.timeoutInSecs=120 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
-    ports:
-      - 8090:8090
   jmeter:
     depends_on:
       - zap
     build: jmeter
-    command: -Dlog_level.jmeter=DEBUG -JTARGET_HOST=demo.testfire.net -JTARGET_PORT=80 -JTARGET_PATH=/bank/login.aspx -H zap -P 8090 -N localhost -n -t /jmeter/tests/security/HTTP_Request.jmx -l /jmeter/results/jmeter/security/HTTP_Request.jtl -j /jmeter/results/jmeter/security/jmeter.log -e -o /jmeter/results/jmeter/security/securityreport
+    command: -Dlog_level.jmeter=DEBUG -JTARGET_HOST=demo.testfire.net -JTARGET_PORT=80 -JTARGET_PATH=/bank/login.aspx -H zap -P 8090 -N localhost -n -t /jmeter/tests/security/HTTP_Request.jmx -l /results/jmeter/security/HTTP_Request.jtl -j /results/jmeter/security/jmeter.log -e -o /results/jmeter/security/securityreport
     volumes:
-      - ./jmeter/results:/jmeter/results/
+      - ./results:/results

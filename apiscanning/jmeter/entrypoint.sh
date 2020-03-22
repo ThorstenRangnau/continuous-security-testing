@@ -12,7 +12,7 @@ x=$(($freeMem/10*8))
 n=$(($freeMem/10*2))
 export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
-rm -rf /jmeter/results/jmeter/security > /dev/null 2>&1
+rm -rf /results/jmeter/security > /dev/null 2>&1
 
 
 echo "START Running Jmeter on `date`"
@@ -24,13 +24,12 @@ echo "jmeter args=$@"
 jmeter $@
 echo "END Running Jmeter on `date`"
 
-mkdir -p /jmeter/results/zap/html
-mkdir -p /jmeter/results/zap/json
+mkdir -p /results/zap/html
+mkdir -p /results/zap/json
 
+# sleep 10 seconds & then retrieve results from ZAP
 sleep 10
+curl -X GET http://zap:8090/HTML/core/view/alerts > /results/zap/html/results.HTML
+curl -X GET http://zap:8090/JSON/core/view/alerts > /results/zap/json/results.JSON
 
-curl -X GET http://zap:8090/HTML/core/view/alerts > /jmeter/results/zap/html/LoginTesting.HTML
-curl -X GET http://zap:8090/JSON/core/view/alerts > /jmeter/results/zap/json/LoginTesting.JSON
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
-
-python3 should_it_fail.py

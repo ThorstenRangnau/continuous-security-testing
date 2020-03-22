@@ -1,0 +1,597 @@
+<head>
+</head>
+<body>
+<h2>alerts</h2>
+<table border="1">
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+POST</td></tr>
+<tr><td>
+evidence</td><td>
+Set-Cookie: JSESSIONID</td></tr>
+<tr><td>
+pluginId</td><td>
+10054</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</td></tr>
+<tr><td>
+messageId</td><td>
+1</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/bank/login.aspx</td></tr>
+<tr><td>
+reference</td><td>
+https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</td></tr>
+<tr><td>
+alert</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+param</td><td>
+JSESSIONID</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+0</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 1: &quot;query&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form id=&quot;frmSearch&quot; method=&quot;get&quot; action=&quot;/search.jsp&quot;&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+1</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 2: &quot;uid&quot; &quot;passw&quot; &quot;btnSubmit&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form action=&quot;doLogin&quot; method=&quot;post&quot; name=&quot;login&quot; id=&quot;login&quot; onsubmit=&quot;return (confirminput(login));&quot;&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+2</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+Set-Cookie: JSESSIONID</td></tr>
+<tr><td>
+pluginId</td><td>
+10054</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</td></tr>
+<tr><td>
+alert</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+param</td><td>
+JSESSIONID</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+3</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+10016</td></tr>
+<tr><td>
+cweid</td><td>
+933</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+14</td></tr>
+<tr><td>
+description</td><td>
+Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+https://www.veracode.com/blog/2014/03/guidelines-for-setting-security-headers/</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.</td></tr>
+<tr><td>
+alert</td><td>
+Web Browser XSS Protection Not Enabled</td></tr>
+<tr><td>
+param</td><td>
+X-XSS-Protection</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Web Browser XSS Protection Not Enabled</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+4</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+&lt;!-- To get the latest admin login, please contact SiteOps at 415-555-6159 --&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+			function setfocus() {
+			    if (document.login.uid.value==&quot;&quot;) {
+			      	document.login.uid.focus();
+			    } else {
+			      	document.login.passw.focus();
+			    }
+			}
+			
+			function confirminput(myform) {
+			    if (myform.uid.value.length &amp;&amp; myform.passw.value.length) {
+			      return (true);
+			    } else if (!(myform.uid.value.length)) {
+			      myform.reset();
+			      myform.uid.focus();
+			      alert (&quot;You must enter a valid username&quot;);
+			      return (false);
+			    } else {
+			      myform.passw.focus();
+			      alert (&quot;You must enter a valid password&quot;);
+			      return (false);
+			    }
+			}
+			window.onload = setfocus;
+		&lt;/script&gt;
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+10027</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+The response appears to contain suspicious comments which may help an attacker.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+</td></tr>
+<tr><td>
+solution</td><td>
+Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</td></tr>
+<tr><td>
+alert</td><td>
+Information Disclosure - Suspicious Comments</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Information Disclosure - Suspicious Comments</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+5</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+At &quot;High&quot; threshold this scanner will not alert on client or server error responses.</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+10021</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+15</td></tr>
+<tr><td>
+description</td><td>
+The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+https://www.owasp.org/index.php/List_of_useful_HTTP_headers</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</td></tr>
+<tr><td>
+alert</td><td>
+X-Content-Type-Options Header Missing</td></tr>
+<tr><td>
+param</td><td>
+X-Content-Type-Options</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+X-Content-Type-Options Header Missing</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+6</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+10020</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+15</td></tr>
+<tr><td>
+description</td><td>
+X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.</td></tr>
+<tr><td>
+messageId</td><td>
+4</td></tr>
+<tr><td>
+url</td><td>
+http://demo.testfire.net/login.jsp</td></tr>
+<tr><td>
+reference</td><td>
+http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx</td></tr>
+<tr><td>
+solution</td><td>
+Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. ALLOW-FROM allows specific websites to frame the web page in supported web browsers).</td></tr>
+<tr><td>
+alert</td><td>
+X-Frame-Options Header Not Set</td></tr>
+<tr><td>
+param</td><td>
+X-Frame-Options</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+X-Frame-Options Header Not Set</td></tr>
+<tr><td>
+risk</td><td>
+Medium</td></tr>
+<tr><td>
+id</td><td>
+7</td></tr>
+</table>
+</td></tr>
+</table>
+</body>

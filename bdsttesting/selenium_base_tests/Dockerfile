@@ -19,9 +19,12 @@ RUN seleniumbase install chromedriver
 
 COPY test_register_web_goat_SB.py /usr/src/app
 COPY test_sql_injection_with_login_SB.py /usr/src/app
-COPY entrypoint.sh /
 
 COPY wait-for-it.sh /usr/src/app
 RUN chmod +x /usr/src/app/wait-for-it.sh
 
+RUN mkdir -p /results
+
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

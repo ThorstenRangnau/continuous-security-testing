@@ -36,17 +36,19 @@ RUN apk add python3
 ENV PATH $PATH:$JMETER_BIN
 
 # Entrypoint has same signature as "jmeter" command
-COPY entrypoint.sh /
 COPY wait-for-it.sh /opt/apache-jmeter-5.1.1
 COPY should_it_fail.py /opt/apache-jmeter-5.1.1
 
 RUN chmod +x /opt/apache-jmeter-5.1.1/wait-for-it.sh
 RUN mkdir /jmeter
 
+RUN mkdir -p /results
 
 COPY tests /jmeter/tests
 
 WORKDIR	${JMETER_HOME}
 
 
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
