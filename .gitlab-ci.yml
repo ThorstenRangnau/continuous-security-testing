@@ -9,6 +9,7 @@ stages:
 
 .export_results: &export_results
   after_script:
+    - ls
     - zip -r results.zip results
   artifacts:
     paths:
