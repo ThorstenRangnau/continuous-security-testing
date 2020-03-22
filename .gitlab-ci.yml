@@ -78,11 +78,9 @@ test_api_scan:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  after_script:
-    - zip -r results.zip apiscanning/results
   artifacts:
     paths:
-      - results.zip
+      - apiscanning/results
     expire_in: 1 week
 
 # TEST WAST
@@ -99,11 +97,9 @@ test_wast:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  after_script:
-    - zip -r results.zip wasttesting/results
   artifacts:
     paths:
-      - results.zip
+      - wasttesting/results
     expire_in: 1 week
 
 
@@ -121,10 +117,8 @@ test_bdst:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  after_script:
-    - zip -r results.zip bdsttesting/results
   artifacts:
     paths:
-      - results.zip
+      - bdsttesting/results
     expire_in: 1 week
 
