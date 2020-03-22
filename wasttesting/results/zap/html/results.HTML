@@ -1,0 +1,1083 @@
+<head>
+</head>
+<body>
+<h2>alerts</h2>
+<table border="1">
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+Set-Cookie: JSESSIONID</td></tr>
+<tr><td>
+pluginId</td><td>
+10010</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</td></tr>
+<tr><td>
+messageId</td><td>
+1</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/</td></tr>
+<tr><td>
+reference</td><td>
+http://www.owasp.org/index.php/HttpOnly</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the HttpOnly flag is set for all cookies.</td></tr>
+<tr><td>
+alert</td><td>
+Cookie No HttpOnly Flag</td></tr>
+<tr><td>
+param</td><td>
+JSESSIONID</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Cookie No HttpOnly Flag</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+0</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+The origin domain used for comparison was: 
+webgoat
+JSESSIONID=KhrxRwqJf9_xGdAgvfnw4WUMryfhEQCijzrPbnye
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+90033</td></tr>
+<tr><td>
+cweid</td><td>
+565</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+15</td></tr>
+<tr><td>
+description</td><td>
+Cookies can be scoped by domain or path. This check is only concerned with domain scope.The domain scope applied to a cookie determines which domains can access it. For example, a cookie can be scoped strictly to a subdomain e.g. www.nottrusted.com, or loosely scoped to a parent domain e.g. nottrusted.com. In the latter case, any subdomain of nottrusted.com can access the cookie. Loosely scoped cookies are common in mega-applications like google.com and live.com. Cookies set from a subdomain like app.foo.bar are transmitted only to that domain by the browser. However, cookies scoped to a parent-level domain may be transmitted to the parent, or any subdomain of the parent.</td></tr>
+<tr><td>
+messageId</td><td>
+1</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/</td></tr>
+<tr><td>
+reference</td><td>
+https://tools.ietf.org/html/rfc6265#section-4.1
+https://www.owasp.org/index.php/Testing_for_cookies_attributes_(OTG-SESS-002)
+http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</td></tr>
+<tr><td>
+solution</td><td>
+Always scope cookies to a FQDN (Fully Qualified Domain Name).</td></tr>
+<tr><td>
+alert</td><td>
+Loosely Scoped Cookie</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Loosely Scoped Cookie</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+1</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+Set-Cookie: JSESSIONID</td></tr>
+<tr><td>
+pluginId</td><td>
+10054</td></tr>
+<tr><td>
+cweid</td><td>
+16</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</td></tr>
+<tr><td>
+messageId</td><td>
+1</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/</td></tr>
+<tr><td>
+reference</td><td>
+https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</td></tr>
+<tr><td>
+solution</td><td>
+Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.</td></tr>
+<tr><td>
+alert</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+param</td><td>
+JSESSIONID</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Cookie Without SameSite Attribute</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+2</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 1: &quot;exampleInputEmail1&quot; &quot;exampleInputPassword1&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form action=&quot;/WebGoat/login&quot; method='POST' style=&quot;width: 200px;&quot;&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+3</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/login</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+3</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+The origin domain used for comparison was: 
+webgoat
+JSESSIONID=pb96kbOHCMPxisRa6glQLd-LgbUtj65g2Iw2ZWzc
+</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+90033</td></tr>
+<tr><td>
+cweid</td><td>
+565</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+15</td></tr>
+<tr><td>
+description</td><td>
+Cookies can be scoped by domain or path. This check is only concerned with domain scope.The domain scope applied to a cookie determines which domains can access it. For example, a cookie can be scoped strictly to a subdomain e.g. www.nottrusted.com, or loosely scoped to a parent domain e.g. nottrusted.com. In the latter case, any subdomain of nottrusted.com can access the cookie. Loosely scoped cookies are common in mega-applications like google.com and live.com. Cookies set from a subdomain like app.foo.bar are transmitted only to that domain by the browser. However, cookies scoped to a parent-level domain may be transmitted to the parent, or any subdomain of the parent.</td></tr>
+<tr><td>
+messageId</td><td>
+13</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/</td></tr>
+<tr><td>
+reference</td><td>
+https://tools.ietf.org/html/rfc6265#section-4.1
+https://www.owasp.org/index.php/Testing_for_cookies_attributes_(OTG-SESS-002)
+http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy_for_cookies</td></tr>
+<tr><td>
+solution</td><td>
+Always scope cookies to a FQDN (Fully Qualified Domain Name).</td></tr>
+<tr><td>
+alert</td><td>
+Loosely Scoped Cookie</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Loosely Scoped Cookie</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+5</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+42857143, which evaluates to: 1971-05-12 00:45:43</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+42857143</td></tr>
+<tr><td>
+pluginId</td><td>
+10096</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A timestamp was disclosed by the application/web server - Unix</td></tr>
+<tr><td>
+messageId</td><td>
+25</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/plugins/bootstrap/css/bootstrap.min.css</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure
+http://projects.webappsec.org/w/page/13246936/Information%20Leakage</td></tr>
+<tr><td>
+solution</td><td>
+Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</td></tr>
+<tr><td>
+alert</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+8</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+66666667, which evaluates to: 1972-02-11 14:31:07</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+66666667</td></tr>
+<tr><td>
+pluginId</td><td>
+10096</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A timestamp was disclosed by the application/web server - Unix</td></tr>
+<tr><td>
+messageId</td><td>
+25</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/plugins/bootstrap/css/bootstrap.min.css</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure
+http://projects.webappsec.org/w/page/13246936/Information%20Leakage</td></tr>
+<tr><td>
+solution</td><td>
+Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</td></tr>
+<tr><td>
+alert</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+14</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+33333333, which evaluates to: 1971-01-21 19:15:33</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+33333333</td></tr>
+<tr><td>
+pluginId</td><td>
+10096</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A timestamp was disclosed by the application/web server - Unix</td></tr>
+<tr><td>
+messageId</td><td>
+25</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/plugins/bootstrap/css/bootstrap.min.css</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure
+http://projects.webappsec.org/w/page/13246936/Information%20Leakage</td></tr>
+<tr><td>
+solution</td><td>
+Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</td></tr>
+<tr><td>
+alert</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+15</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+80000000, which evaluates to: 1972-07-14 22:13:20</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+80000000</td></tr>
+<tr><td>
+pluginId</td><td>
+10096</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A timestamp was disclosed by the application/web server - Unix</td></tr>
+<tr><td>
+messageId</td><td>
+25</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/plugins/bootstrap/css/bootstrap.min.css</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure
+http://projects.webappsec.org/w/page/13246936/Information%20Leakage</td></tr>
+<tr><td>
+solution</td><td>
+Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</td></tr>
+<tr><td>
+alert</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+152</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+00000000, which evaluates to: 1970-01-01 00:00:00</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+00000000</td></tr>
+<tr><td>
+pluginId</td><td>
+10096</td></tr>
+<tr><td>
+cweid</td><td>
+200</td></tr>
+<tr><td>
+confidence</td><td>
+Low</td></tr>
+<tr><td>
+wascid</td><td>
+13</td></tr>
+<tr><td>
+description</td><td>
+A timestamp was disclosed by the application/web server - Unix</td></tr>
+<tr><td>
+messageId</td><td>
+25</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/plugins/bootstrap/css/bootstrap.min.css</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure
+http://projects.webappsec.org/w/page/13246936/Information%20Leakage</td></tr>
+<tr><td>
+solution</td><td>
+Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</td></tr>
+<tr><td>
+alert</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Timestamp Disclosure - Unix</td></tr>
+<tr><td>
+risk</td><td>
+Informational</td></tr>
+<tr><td>
+id</td><td>
+153</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 1: &quot;username&quot; &quot;password&quot; &quot;matchingPassword&quot; &quot;agree&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form class=&quot;form-horizontal&quot; action=&quot;/WebGoat/register.mvc&quot; method='POST'&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+30</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/registration</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+156</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 1: &quot;exampleInputEmail1&quot; &quot;exampleInputPassword1&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+GET</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form action=&quot;/WebGoat/login&quot; method='POST' style=&quot;width: 200px;&quot;&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+35</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/login?error</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+157</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+3</td></tr>
+<tr><td>
+other</td><td>
+No known Anti-CSRF token [anticsrf, CSRFToken, __RequestVerificationToken, csrfmiddlewaretoken, authenticity_token, OWASP_CSRFTOKEN, anoncsrf, csrf_token, _csrf, _csrfSecret] was found in the following HTML form: [Form 1: &quot;username&quot; &quot;password&quot; &quot;matchingPassword&quot; &quot;agree&quot; ].</td></tr>
+<tr><td>
+method</td><td>
+POST</td></tr>
+<tr><td>
+evidence</td><td>
+&lt;form class=&quot;form-horizontal&quot; action=&quot;/WebGoat/register.mvc&quot; method='POST'&gt;</td></tr>
+<tr><td>
+pluginId</td><td>
+10202</td></tr>
+<tr><td>
+cweid</td><td>
+352</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+9</td></tr>
+<tr><td>
+description</td><td>
+No Anti-CSRF tokens were found in a HTML submission form.
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+    * The victim has an active session on the target site.
+    * The victim is authenticated via HTTP auth on the target site.
+    * The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.</td></tr>
+<tr><td>
+messageId</td><td>
+36</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/register.mvc</td></tr>
+<tr><td>
+reference</td><td>
+http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html</td></tr>
+<tr><td>
+solution</td><td>
+Phase: Architecture and Design
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.</td></tr>
+<tr><td>
+alert</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+param</td><td>
+</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Absence of Anti-CSRF Tokens</td></tr>
+<tr><td>
+risk</td><td>
+Low</td></tr>
+<tr><td>
+id</td><td>
+158</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+1</td></tr>
+<tr><td>
+other</td><td>
+The page results were successfully manipulated using the boolean conditions [agree AND 1=1 -- ] and [agree AND 1=2 -- ]
+The parameter value being modified was stripped from the HTML output for the purposes of the comparison
+Data was returned for the original parameter.
+The vulnerability was detected by successfully restricting the data originally returned, by manipulating the parameter</td></tr>
+<tr><td>
+method</td><td>
+POST</td></tr>
+<tr><td>
+evidence</td><td>
+</td></tr>
+<tr><td>
+pluginId</td><td>
+40018</td></tr>
+<tr><td>
+cweid</td><td>
+89</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+19</td></tr>
+<tr><td>
+description</td><td>
+SQL injection may be possible.</td></tr>
+<tr><td>
+messageId</td><td>
+471</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/register.mvc</td></tr>
+<tr><td>
+reference</td><td>
+https://www.owasp.org/index.php/Top_10_2010-A1
+https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet</td></tr>
+<tr><td>
+solution</td><td>
+Do not trust client side input, even if there is client side validation in place.  
+In general, type check all data on the server side.
+If the application uses JDBC, use PreparedStatement or CallableStatement, with parameters passed by '?'
+If the application uses ASP, use ADO Command Objects with strong type checking and parameterized queries.
+If database Stored Procedures can be used, use them.
+Do *not* concatenate strings into queries in the stored procedure, or use 'exec', 'exec immediate', or equivalent functionality!
+Do not create dynamic SQL queries using simple string concatenation.
+Escape all data received from the client.
+Apply a 'whitelist' of allowed characters, or a 'blacklist' of disallowed characters in user input.
+Apply the principle of least privilege by using the least privileged database user possible.
+In particular, avoid using the 'sa' or 'db-owner' database users. This does not eliminate SQL injection, but minimizes its impact.
+Grant the minimum database access that is necessary for the application.</td></tr>
+<tr><td>
+alert</td><td>
+SQL Injection</td></tr>
+<tr><td>
+param</td><td>
+agree</td></tr>
+<tr><td>
+attack</td><td>
+agree AND 1=1 -- </td></tr>
+<tr><td>
+name</td><td>
+SQL Injection</td></tr>
+<tr><td>
+risk</td><td>
+High</td></tr>
+<tr><td>
+id</td><td>
+159</td></tr>
+</table>
+</td></tr>
+<tr><td>
+<h2>alert</h2>
+<table border="1">
+<tr><td>
+sourceid</td><td>
+1</td></tr>
+<tr><td>
+other</td><td>
+</td></tr>
+<tr><td>
+method</td><td>
+POST</td></tr>
+<tr><td>
+evidence</td><td>
+javax.servlet.http.HttpServlet.service(HttpServlet.java:523)\n\tat</td></tr>
+<tr><td>
+pluginId</td><td>
+40008</td></tr>
+<tr><td>
+cweid</td><td>
+472</td></tr>
+<tr><td>
+confidence</td><td>
+Medium</td></tr>
+<tr><td>
+wascid</td><td>
+20</td></tr>
+<tr><td>
+description</td><td>
+Parameter manipulation caused an error page or Java stack trace to be displayed.  This indicated lack of exception handling and potential areas for further exploit.</td></tr>
+<tr><td>
+messageId</td><td>
+977</td></tr>
+<tr><td>
+url</td><td>
+http://webgoat:8080/WebGoat/register.mvc</td></tr>
+<tr><td>
+reference</td><td>
+</td></tr>
+<tr><td>
+solution</td><td>
+Identify the cause of the error and fix it.  Do not trust client side input and enforce a tight check in the server side.  Besides, catch the exception properly.  Use a generic 500 error page for internal server error.</td></tr>
+<tr><td>
+alert</td><td>
+Parameter Tampering</td></tr>
+<tr><td>
+param</td><td>
+matchingPassword</td></tr>
+<tr><td>
+attack</td><td>
+</td></tr>
+<tr><td>
+name</td><td>
+Parameter Tampering</td></tr>
+<tr><td>
+risk</td><td>
+Medium</td></tr>
+<tr><td>
+id</td><td>
+160</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
