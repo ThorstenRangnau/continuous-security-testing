@@ -6,6 +6,7 @@ services:
 stages:
   - build
   - test
+  - evaluate
 
 # BUILD API SCANNING
 build_api_scan_zap:
@@ -125,7 +126,7 @@ test_bdst:
 
 # EVALUATE_API_SCAN
 evaluate_api_scan:
-  stage: test
+  stage: evaluate
   script:
     - ls
     - should_it_fail.py
@@ -134,7 +135,7 @@ evaluate_api_scan:
 
 # EVALUATE_WAST
 evaluate_wast:
-  stage: test
+  stage: evaluate
   script:
     - ls
     - should_it_fail.py
@@ -143,7 +144,7 @@ evaluate_wast:
 
 # EVALUATE_BDST
 evaluate_bdst:
-  stage: test
+  stage: evaluate
   script:
     - ls
     - should_it_fail.py
