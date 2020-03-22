@@ -138,6 +138,8 @@ evaluate_wast:
   stage: evaluate
   script:
     - ls
+    - ls apiscanning/results
+    - ls apiscanning/results/zap/html
     - should_it_fail.py
   dependencies:
     - test_wast
