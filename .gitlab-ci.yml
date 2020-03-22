@@ -8,6 +8,7 @@ stages:
   - test
 
 .export_results: &export_results
+  after_script:
     - cd ..
     - zip -r ./results results.zip
   artifacts:
