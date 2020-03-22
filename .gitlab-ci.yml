@@ -116,7 +116,7 @@ test_bdst:
     - apk add python3
     - export ZAP_URL=$CI_REGISTRY/$CI_PROJECT_PATH:bdst-zap-$CI_COMMIT_SHA
     - export SELENIUM_URL=$CI_REGISTRY/$CI_PROJECT_PATH:bdst-selenium-$CI_COMMIT_SHA
-    - python3 update-compose.py --file='bdsttesting/docker-compose.yml' --variables 'selenium_url' 'zap_url'
+    - python3 update-compose.py --file='bdsttesting/docker-compose.yml' --variables 'zap_url' 'selenium_url'
     - cd bdsttesting
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY

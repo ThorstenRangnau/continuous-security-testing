@@ -1,182 +1,146 @@
-#!/usr/bin/env bash
-# Use this script to test if a given TCP host/port are available
+#!/usr/bin/env sh
+#
+# Compare a command exit status to some given number(s) for a period of time.
 
-WAITFORIT_cmdname=${0##*/}
+CMD_NAME="${0##*/}"
+CMD=""
+STATUS=0
+TIME=10
+TIME_START=0
+QUIET=0
+EXIT_STATUS=1
 
-echoerr() { if [[ $WAITFORIT_QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
-
-usage()
-{
-    cat << USAGE >&2
-Usage:
-    $WAITFORIT_cmdname host:port [-s] [-t timeout] [-- command args]
-    -h HOST | --host=HOST       Host or IP under test
-    -p PORT | --port=PORT       TCP port under test
-                                Alternatively, you specify the host and port as host:port
-    -s | --strict               Only execute subcommand if the test succeeds
-    -q | --quiet                Don't output any status messages
-    -t TIMEOUT | --timeout=TIMEOUT
-                                Timeout in seconds, zero for no timeout
-    -- COMMAND ARGS             Execute command with args after the test finishes
-USAGE
-    exit 1
+usage() {
+  cat << EOF >&2
+Usage: ${CMD_NAME} [-c 'COMMAND']
+       ${CMD_NAME} [OPTION]... [-c 'COMMAND']
+       ${CMD_NAME} [-c 'COMMAND'] [OPTION]...
+${CMD_NAME} compares a command exit status to some given number(s) 
+for a period of time. If comparison is successfully 
+${CMD_NAME} returns 0, otherwise 1.
+Example: ${CMD_NAME} -c 'echo > /dev/tcp/127.0.0.1/5432'
+     ${CMD_NAME} -s 0 57 -c 'curl 127.0.0.1:5432'
+     ${CMD_NAME} -c 'nc -z 127.0.0.1 5432' -s 0 -t 20 -q
+Options:
+  -c, --command ['COMMAND']   execute a COMMAND.
+  -s, --status [NUMBER]...    target exit status of COMMAND, default 0.
+  -t, --time [NUMBER]         max time to wait in seconds, default 10.
+  -q, --quiet                 do not make any output, default false.
+      --help                  display this help.
+Notice that quotes are needed after -c/--command for multi-argument 
+COMMANDs.
+Specifying a same OPTION more than once overrides the previews. 
+So "${CMD_NAME} -c 'nothing' -c 'curl 127.0.0.1:5432'" will be 
+the same as "${CMD_NAME} -c 'curl 127.0.0.1:5432'". 
+It does not apply to option -q/--quiet.
+EOF
+  exit 0
 }
 
-wait_for()
-{
-    if [[ $WAITFORIT_TIMEOUT -gt 0 ]]; then
-        echoerr "$WAITFORIT_cmdname: waiting $WAITFORIT_TIMEOUT seconds for $WAITFORIT_HOST:$WAITFORIT_PORT"
-    else
-        echoerr "$WAITFORIT_cmdname: waiting for $WAITFORIT_HOST:$WAITFORIT_PORT without a timeout"
-    fi
-    WAITFORIT_start_ts=$(date +%s)
-    while :
-    do
-        if [[ $WAITFORIT_ISBUSY -eq 1 ]]; then
-            nc -z $WAITFORIT_HOST $WAITFORIT_PORT
-            WAITFORIT_result=$?
-        else
-            (echo > /dev/tcp/$WAITFORIT_HOST/$WAITFORIT_PORT) >/dev/null 2>&1
-            WAITFORIT_result=$?
-        fi
-        if [[ $WAITFORIT_result -eq 0 ]]; then
-            WAITFORIT_end_ts=$(date +%s)
-            echoerr "$WAITFORIT_cmdname: $WAITFORIT_HOST:$WAITFORIT_PORT is available after $((WAITFORIT_end_ts - WAITFORIT_start_ts)) seconds"
-            break
-        fi
-        sleep 1
-    done
-    return $WAITFORIT_result
+output() {
+  if [ "${QUIET}" -ne 1 ]; then
+    printf "%s\n" "$*" 1>&2;
+  fi
 }
 
-wait_for_wrapper()
-{
-    # In order to support SIGINT during timeout: http://unix.stackexchange.com/a/57692
-    if [[ $WAITFORIT_QUIET -eq 1 ]]; then
-        timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT $0 --quiet --child --host=$WAITFORIT_HOST --port=$WAITFORIT_PORT --timeout=$WAITFORIT_TIMEOUT &
-    else
-        timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT $0 --child --host=$WAITFORIT_HOST --port=$WAITFORIT_PORT --timeout=$WAITFORIT_TIMEOUT &
-    fi
-    WAITFORIT_PID=$!
-    trap "kill -INT -$WAITFORIT_PID" INT
-    wait $WAITFORIT_PID
-    WAITFORIT_RESULT=$?
-    if [[ $WAITFORIT_RESULT -ne 0 ]]; then
-        echoerr "$WAITFORIT_cmdname: timeout occurred after waiting $WAITFORIT_TIMEOUT seconds for $WAITFORIT_HOST:$WAITFORIT_PORT"
-    fi
-    return $WAITFORIT_RESULT
-}
-
-# process arguments
-while [[ $# -gt 0 ]]
-do
+process_command() {
+  while [ "$#" -gt 0 ]; do
     case "$1" in
-        *:* )
-        WAITFORIT_hostport=(${1//:/ })
-        WAITFORIT_HOST=${WAITFORIT_hostport[0]}
-        WAITFORIT_PORT=${WAITFORIT_hostport[1]}
-        shift 1
-        ;;
-        --child)
-        WAITFORIT_CHILD=1
-        shift 1
-        ;;
-        -q | --quiet)
-        WAITFORIT_QUIET=1
-        shift 1
-        ;;
-        -s | --strict)
-        WAITFORIT_STRICT=1
-        shift 1
-        ;;
-        -h)
-        WAITFORIT_HOST="$2"
-        if [[ $WAITFORIT_HOST == "" ]]; then break; fi
-        shift 2
-        ;;
-        --host=*)
-        WAITFORIT_HOST="${1#*=}"
-        shift 1
-        ;;
-        -p)
-        WAITFORIT_PORT="$2"
-        if [[ $WAITFORIT_PORT == "" ]]; then break; fi
-        shift 2
-        ;;
-        --port=*)
-        WAITFORIT_PORT="${1#*=}"
-        shift 1
-        ;;
-        -t)
-        WAITFORIT_TIMEOUT="$2"
-        if [[ $WAITFORIT_TIMEOUT == "" ]]; then break; fi
-        shift 2
-        ;;
-        --timeout=*)
-        WAITFORIT_TIMEOUT="${1#*=}"
-        shift 1
-        ;;
-        --)
-        shift
-        WAITFORIT_CLI=("$@")
-        break
-        ;;
-        --help)
-        usage
-        ;;
-        *)
-        echoerr "Unknown argument: $1"
-        usage
-        ;;
-    esac
-done
-
-if [[ "$WAITFORIT_HOST" == "" || "$WAITFORIT_PORT" == "" ]]; then
-    echoerr "Error: you need to provide a host and port to test."
+      -c | --command)
+    # allow one shift when no arguments
+    if [ -n "$2" ]; then
+      CMD="$2"
+          shift 1
+    fi
+    shift 1
+    ;;
+      -s | --status)
+    # ensure that a number is provided
+    if ([ "$2" -eq "$2" ]) >/dev/null 2>&1; then
+      unset STATUS          
+      # ensure that a number is provided
+      while ([ "$2" -eq "$2" ]) >/dev/null 2>&1; do
+        if [ -z "${STATUS}" ]; then
+          STATUS="$2"
+          shift 1
+            else
+          STATUS="${STATUS} $2"
+          shift 1
+        fi
+          done
+    fi
+    shift 1
+    ;;
+      -t | --time)
+    # ensure that a number is provided
+    if ([ "$2" -eq "$2" ]) >/dev/null 2>&1; then
+      TIME="$2"
+      shift 1
+    fi
+    shift 1
+    ;;
+      -q | --quiet)
+    QUIET=1
+    shift 1
+    ;;
+      --help)
     usage
-fi
+    ;;
+      *)
+    output "Unknown argument: $1"
+    output "Try '${CMD_NAME} --help' for more information."
+    exit "${EXIT_STATUS}"
+    ;;
+    esac
+  done
+    
+  if [ -z "${CMD}" ]; then
+    output "Missing command: -c, --command ['COMMAND']"
+    output "Try '${CMD_NAME} --help' for more information."
+    exit "${EXIT_STATUS}"
+  fi
+}
 
-WAITFORIT_TIMEOUT=${WAITFORIT_TIMEOUT:-15}
-WAITFORIT_STRICT=${WAITFORIT_STRICT:-0}
-WAITFORIT_CHILD=${WAITFORIT_CHILD:-0}
-WAITFORIT_QUIET=${WAITFORIT_QUIET:-0}
+main() {
+  message="failed"
+  
+  process_command "$@"
+  
+  TIME_START=$(date +%s)
+  
+  while [ $(($(date +%s)-TIME_START)) -lt "${TIME}" ]; do
 
-# Check to see if timeout is from busybox?
-WAITFORIT_TIMEOUT_PATH=$(type -p timeout)
-WAITFORIT_TIMEOUT_PATH=$(realpath $WAITFORIT_TIMEOUT_PATH 2>/dev/null || readlink -f $WAITFORIT_TIMEOUT_PATH)
+    ($CMD) >/dev/null 2>&1 &
+    pid="$!"
+    
+    # while both ps and time are running sleep 1s
+    while kill -0 "${pid}" >/dev/null 2>&1 &&
+          [ $(($(date +%s)-TIME_START)) -lt "${TIME}" ]; do
+      sleep 1
+    done
+    
+    # gets CMD status
+    kill "${pid}" >/dev/null 2>&1
+    wait "${pid}" >/dev/null 2>&1
+    cmd_exit_status="$?"
+    
+    # looks for equlity in CMD exit status and one of the given status
+    for i in $STATUS; do
+      if ([ "${cmd_exit_status}" -eq "${i}" ]) >/dev/null 2>&1; then
+        message="finished successfully"
+    EXIT_STATUS=0
+    break 2
+      fi
+    done
 
-WAITFORIT_BUSYTIMEFLAG=""
-if [[ $WAITFORIT_TIMEOUT_PATH =~ "busybox" ]]; then
-    WAITFORIT_ISBUSY=1
-    # Check if busybox timeout uses -t flag
-    # (recent Alpine versions don't support -t anymore)
-    if timeout &>/dev/stdout | grep -q -e '-t '; then
-        WAITFORIT_BUSYTIMEFLAG="-t"
-    fi
-else
-    WAITFORIT_ISBUSY=0
-fi
+  done
 
-if [[ $WAITFORIT_CHILD -gt 0 ]]; then
-    wait_for
-    WAITFORIT_RESULT=$?
-    exit $WAITFORIT_RESULT
-else
-    if [[ $WAITFORIT_TIMEOUT -gt 0 ]]; then
-        wait_for_wrapper
-        WAITFORIT_RESULT=$?
-    else
-        wait_for
-        WAITFORIT_RESULT=$?
-    fi
-fi
+  output "${CMD_NAME} ${message} after $(($(date +%s)-TIME_START)) second(s)."
+  output "cmd:                 ${CMD}"
+  output "target exit status:  ${STATUS}"
+  output "exited status:       ${cmd_exit_status}"
 
-if [[ $WAITFORIT_CLI != "" ]]; then
-    if [[ $WAITFORIT_RESULT -ne 0 && $WAITFORIT_STRICT -eq 1 ]]; then
-        echoerr "$WAITFORIT_cmdname: strict mode, refusing to execute subprocess"
-        exit $WAITFORIT_RESULT
-    fi
-    exec "${WAITFORIT_CLI[@]}"
-else
-    exit $WAITFORIT_RESULT
-fi
+  exit "${EXIT_STATUS}"
+}
+
+main "$@"
