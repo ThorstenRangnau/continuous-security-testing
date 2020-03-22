@@ -7,8 +7,12 @@ echo "Checking for WebGoat"
 ./wait-for-it.sh -c 'nc -z webgoat 8080' -t 60
 
 # we actually have to run two selenium tests first one to register a user
-exec "$@"
+echo "$@"
+echo "running tests"
+$@
 
+echo "terminating ZAP"
 # tests are done, so terminate ZAP & webgoat
 curl -X GET http://zap:8090/JSON/core/action/shutdown/
-docker kill  wasttesting_webgoat_1 --signal=SIGINT
+echo "terminating webgoat"
+docker kill  bdsttesting_webgoat_1 --signal=SIGINT

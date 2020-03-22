@@ -26,7 +26,8 @@ services:
             - zap
             - webgoat
         command: py.test -s --browser=chrome --headless --proxy=172.28.1.1:8090
-#      && pytest -s test_sql_injection_with_login_SB.py --browser=chrome --headless --proxy=172.28.1.1:8090
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
         networks:
             testing_net:
                 ipv4_address: 172.28.1.3
