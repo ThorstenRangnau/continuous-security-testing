@@ -78,13 +78,15 @@ test_api_scan:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
+    - zip -r jmeter/results/jmeter jmeter/results/jmeter.zip
+    - zip -r jmeter/results/zap jmeter/results/zap.zip
     - ls jmeter/results/jmeter
     - ls jmeter/results/zap
   # - python3 parse_results.py 
   artifacts:
     paths:
-      - jmeter/results/jmeter
-      - jmeter/results/zap
+      - jmeter/results/jmeter.zip
+      - jmeter/results/zap.zip
 
 # TEST WAST
 test_wast:
