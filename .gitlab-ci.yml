@@ -127,28 +127,34 @@ test_bdst:
 # EVALUATE_API_SCAN
 evaluate_api_scan:
   stage: evaluate
+  before_script:
+    - apk add python3
   script:
     - ls
-    - should_it_fail.py
+    - python3 should_it_fail.py
   dependencies:
     - test_api_scan
 
 # EVALUATE_WAST
 evaluate_wast:
   stage: evaluate
+  before_script:
+    - apk add python3
   script:
     - ls
     - ls apiscanning/results
     - ls apiscanning/results/zap/html
-    - should_it_fail.py
+    - python3 should_it_fail.py
   dependencies:
     - test_wast
 
 # EVALUATE_BDST
 evaluate_bdst:
   stage: evaluate
+  before_script:
+    - apk add python3
   script:
     - ls
-    - should_it_fail.py
+    - python3 should_it_fail.py
   dependencies:
     - test_bdst
