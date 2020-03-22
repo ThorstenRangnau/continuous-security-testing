@@ -122,3 +122,30 @@ test_bdst:
       - bdsttesting/results
     expire_in: 1 week
 
+
+# EVALUATE_API_SCAN
+evaluate_api_scan:
+  stage: test
+  script:
+    - ls
+    - should_it_fail.py
+  dependencies:
+    - test_api_scan
+
+# EVALUATE_WAST
+evaluate_wast:
+  stage: test
+  script:
+    - ls
+    - should_it_fail.py
+  dependencies:
+    - test_wast
+
+# EVALUATE_BDST
+evaluate_bdst:
+  stage: test
+  script:
+    - ls
+    - should_it_fail.py
+  dependencies:
+    - test_bdst
