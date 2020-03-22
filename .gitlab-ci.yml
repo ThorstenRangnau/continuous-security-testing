@@ -7,15 +7,6 @@ stages:
   - build
   - test
 
-.export_results: &export_results
-  after_script:
-    - ls
-    - zip -r results.zip results
-  artifacts:
-    paths:
-      - results.zip
-    expire_in: 1 week
-
 # BUILD API SCANNING
 build_api_scan_zap:
   stage: build
@@ -87,7 +78,13 @@ test_api_scan:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  <<: *export_results
+  after_script:
+    - ls
+    - zip -r results.zip results
+  artifacts:
+    paths:
+      - results.zip
+    expire_in: 1 week
 
 # TEST WAST
 test_wast:
@@ -103,7 +100,13 @@ test_wast:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  <<: *export_results
+  after_script:
+    - ls
+    - zip -r results.zip results
+  artifacts:
+    paths:
+      - results.zip
+    expire_in: 1 week
 
 
 # TEST BDST
@@ -120,5 +123,11 @@ test_bdst:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose up
-  <<: *export_results
+  after_script:
+    - ls
+    - zip -r results.zip results
+  artifacts:
+    paths:
+      - results.zip
+    expire_in: 1 week
 
